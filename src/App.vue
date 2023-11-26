@@ -9,9 +9,8 @@ const onLogout = () => {
     router.push('/login')
 }
 
-const notLoggedInYet = () => {
-    alert("Anda harus login terlebih dahulu.")
-}
+console.log(auth.username)
+
 </script>
 
 <template>
@@ -20,16 +19,15 @@ const notLoggedInYet = () => {
             <div class="header">
                 <router-link to="/">Home</router-link>
                 <router-link to="/about">About</router-link>
-                <router-link to="/restricted" v-if="auth.isAuthenticated">Restricted Page</router-link>
-                <router-link to="/login" v-else @click="notLoggedInYet()">Restricted Page</router-link>
+                <router-link to="/restricted">Restricted Page</router-link>
             </div>
             <div class="login">
-                <p v-if="auth.isAuthenticated">{{ auth.username }}</p>
-                <div v-if="auth.isAuthenticated">
+                <p v-if="auth.isLoggedIn()">{{ auth.username }}</p>
+                <div v-if="auth.isLoggedIn()">
                     <router-link class="logoutButton" to="/login" @click=onLogout()>Logout</router-link>
                 </div>
                 <div v-else>
-                    <router-link class="loginButton" to="login">Login</router-link>
+                    <router-link class="loginButton" to="/login">Login</router-link>
                 </div>
             </div>
         </div>

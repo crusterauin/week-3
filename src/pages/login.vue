@@ -1,17 +1,28 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import axios from 'axios';
 import { useAuthStore } from '@/stores/auth';
 import { useRouter } from 'vue-router';
-
-const router = useRouter()
 const auth = useAuthStore()
+const router = useRouter()
+
 const username = ref('')
 const password = ref('')
 
-const onLogin = () => {
-  auth.login(username.value, password.value)
-  router.push('/')
+const onLogin = async () => {
+  try {
+    const response = await axios.post('http://localhost:3000/login', {
+      username: username.value,
+      password: password.value,
+    })
+    
+    auth.login(username.value, password.value)
+    console.log(response);
+  } catch (error) {
+    console.error('Login error:', error);
+  }
 }
+console.log(Response)
 </script>
 
 <style>
