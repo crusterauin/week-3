@@ -10,6 +10,9 @@ const username = ref('')
 const password = ref('')
 
 const onLogin = async () => {
+  if(username.value === "" || password.value === "") {
+    alert("Username or Password can't be empty")
+  } else {
   try {
     const response = await axios.post('http://localhost:3000/login', {
       username: username.value,
@@ -22,6 +25,7 @@ const onLogin = async () => {
     console.error('Login error:', error);
   }
 }
+}
 console.log(Response)
 </script>
 
@@ -29,6 +33,7 @@ console.log(Response)
 .inputButton{
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .input {
@@ -37,8 +42,6 @@ console.log(Response)
   border-style:groove;
   padding-top: 0.2rem;
   padding-bottom: 0.2rem;
-  min-width: 10rem;
-  width: 100%;
 }
 
 .button {
@@ -46,9 +49,17 @@ console.log(Response)
   background-color: blue;
   border-radius: 0.25rem;
   font-size: 2rem;
-  border: none;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+  transition-timing-function: ease-in-out;
+  transition-duration: 0.25s;
+}
+
+.button:hover {
+  color: blue;
+  background-color: white;
+  transition-timing-function: ease-in-out;
+  transition-duration: 0.25s;
 }
 
 
